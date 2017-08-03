@@ -1,5 +1,5 @@
 {
-    "name": "csanquer/colibri-csv",
+    "name": "spyrit/colibri-csv",
     "description": "Lightweight and performant CSV reader and writer library",
     "type": "library",
     "keywords": ["csv", "import", "export", "reader", "writer", "parser"],
@@ -28,7 +28,7 @@
         "doctrine/inflector": "~1.0"
     },
     "autoload": {
-        "psr-4": { 
+        "psr-4": {
             "CSanquer\\ColibriCsv\\": "src/",
             "CSanquer\\ColibriCsv\\Tests\\": "tests/"
         }

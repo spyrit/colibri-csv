@@ -3,6 +3,7 @@
 namespace CSanquer\ColibriCsv;
 
 use CSanquer\ColibriCsv\Utility\Transcoder;
+use Ddeboer\Transcoder\Exception\IllegalCharacterException;
 
 /**
  * Csv Reader
@@ -134,7 +135,10 @@ class CsvReader extends AbstractCsv implements \Iterator, \Countable
                         $var = str_replace($escape.$enclosure, $enclosure, $var);
                     }
 
-                    $var = $transcoder->transcode($var, $detectedEncoding, 'UTF-8', $translit);
+                    try {
+                        $var = $transcoder->transcode($var, $detectedEncoding, 'UTF-8', $translit);
+                    } catch (IllegalCharacterException $e) {
+                    }
 
                     return $trim ? trim($var) : $var;
                 }, $line);
@@ -152,7 +156,7 @@ class CsvReader extends AbstractCsv implements \Iterator, \Countable
         if ($this->dialect->getFirstRowHeader() && !empty($this->headers) && !empty($row)) {
             $row = array_combine($this->headers, $row);
         }
-        
+
         return $row;
     }
 
@@ -242,14 +246,14 @@ class CsvReader extends AbstractCsv implements \Iterator, \Countable
             rewind($this->getFileHandler());
 
             $this->position = -1;
-            
+
             if ($this->dialect->getFirstRowHeader()) {
                 $this->position++;
                 $this->headers = [];
                 $this->currentValues = null;
                 $this->headers = array_map('trim', $this->readLine($this->getFileHandler()));
             }
-            
+
             $this->next();
         }
     }
@@ -300,7 +304,7 @@ class CsvReader extends AbstractCsv implements \Iterator, \Countable
         if ($this->dialect->getFirstRowHeader() && $count > 0) {
             --$count;
         }
-        
+
         return $count;
     }
 }
