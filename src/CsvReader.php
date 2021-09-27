@@ -153,7 +153,7 @@ class CsvReader extends AbstractCsv implements \Iterator, \Countable
             }
         }
 
-        if ($this->dialect->getFirstRowHeader() && !empty($this->headers) && !empty($row)) {
+        if ($this->dialect->getFirstRowHeader() && is_array($row) && count($this->headers) === count($row)) {
             $row = array_combine($this->headers, $row);
         }
 
