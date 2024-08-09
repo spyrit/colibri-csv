@@ -2,9 +2,9 @@
 
 namespace CSanquer\ColibriCsv\Tests;
 
-use Doctrine\Common\Inflector\Inflector;
 use CSanquer\ColibriCsv\Dialect;
 use CSanquer\ColibriCsv\Tests\AbstractCsvTestCase;
+use Doctrine\Inflector\InflectorFactory;
 
 /**
  * DialectTest
@@ -19,7 +19,7 @@ class DialectTest extends AbstractCsvTestCase
      */
     protected $dialect;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->dialect = new Dialect();
     }
@@ -31,7 +31,7 @@ class DialectTest extends AbstractCsvTestCase
     {
         $dialect = new Dialect($options);
         foreach ($expected as $key => $value) {
-            $this->assertEquals($value, call_user_func(array($dialect, Inflector::camelize('get_'.$key))), 'the value is not the expected for the option '.$key);
+            $this->assertEquals($value, call_user_func(array($dialect, InflectorFactory::create()->build()->camelize('get_'.$key))), 'the value is not the expected for the option '.$key);
         }
 
     }
@@ -94,7 +94,7 @@ class DialectTest extends AbstractCsvTestCase
         $dialect = call_user_func(array('\\CSanquer\\ColibriCsv\\Dialect', $method));
         $this->assertInstanceOf('\\CSanquer\\ColibriCsv\\Dialect', $dialect);
         foreach ($expected as $key => $value) {
-            $this->assertEquals($value, call_user_func(array($dialect, Inflector::camelize('get_'.$key))), 'the value is not the expected for the option '.$key);
+            $this->assertEquals($value, call_user_func(array($dialect, InflectorFactory::create()->build()->camelize('get_'.$key))), 'the value is not the expected for the option '.$key);
         }
 
     }
