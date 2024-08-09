@@ -16,7 +16,7 @@ CSanquer ColibriCSV
 [![Monthly Downloads](https://poser.pugx.org/csanquer/colibri-csv/d/monthly.png)](https://packagist.org/packages/csanquer/colibri-csv)
 [![Total Downloads](https://poser.pugx.org/csanquer/colibri-csv/downloads.png)](https://packagist.org/packages/csanquer/colibri-csv)
 
-A lightweight, simple and performant CSV Reader/Writer PHP 5.4+ Library, inspired from Python CSV Module.
+A lightweight, simple and performant CSV Reader/Writer PHP 7.4+ Library, inspired from Python CSV Module.
 Fully Tested, very memory efficient and able to parse/write CSV files that weigh over 100 Mb.
 
 This is a fork of [Spyrit LightCSV library](https://github.com/spyrit/LightCsv), I have developed previously in this company.
@@ -33,7 +33,7 @@ curl -s https://getcomposer.org/installer | php
 * add "[https://packagist.org/packages/csanquer/colibri-csv](csanquer/colibri-csv)" package to your composer.json file require section
 
 ```bash
-php composer.phar require csanquer/colibri-csv:1.0.*
+php composer.phar require csanquer/colibri-csv:^1.0
 ```
 
 * install dependencies
@@ -212,7 +212,7 @@ $writer = new CsvWriter($dialect);
 Requirements
 ------------
 
-* PHP >= 5.4
+* PHP >= 7.4
 * extension mbstring
 
 Suggested :
@@ -225,7 +225,7 @@ Tests
 run unit tests with phpunit :
 
 ```sh
-phpunit
+vendor/bin/phpunit
 ```
 
 run benchmark test :
